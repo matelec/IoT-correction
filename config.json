@@ -1,0 +1,8 @@
+{
+    "wifi_ssid": "wifi627",
+    "wifi_password": "4ddi54?*ehhp3PJW",
+    "mqtt_broker": "192.168.1.251",
+    "mqtt_topic": "IoT/temperature",
+    "mqtt_user": "ha-mqtt",
+    "mqtt_password": "__**password_not_changed**__"
+  }
