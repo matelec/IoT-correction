@@ -3,7 +3,6 @@ from ConnectWifi import WiFiConnection
 from parametres import SSID, PASSWORD
 from Temperature import LectureTemperature
 from Affichage import AffichageOled
-from Envoyer import startMQTT
 from machine import Pin, SoftI2C
 import ssd1306
 import time   
@@ -40,7 +39,6 @@ def main():
         temp = capteur_temp.readTemp()
         if temp is not None:
             print(f"Température : {temp} °C")
-   #     startMQTT(temp)
         time.sleep(5)      
 
 # programme principal.

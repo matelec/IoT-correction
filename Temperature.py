@@ -15,21 +15,13 @@ class LectureTemperature:
         time.sleep(0.1)    
 
     def readTemp(self):
-#        buf = bytearray(1)  # création d’un buffer 1 octet
-#        buf[0] = 0x00  # adresse du registre point
-#        print("avant écriture")
-#        self.i2c.writeto(0x48, buf)  # écriture dans le LM75
-#        print("avant lecture")
         try:
-            mesure = self.i2c.readfrom_mem(0x48, 0x00, 2)  # lecture
-#        	print(mesure)
             val = (mesure[0] << 3)|(mesure[1] >> 5) #reduction de 16 à 11bits.
             if (val > 1023):                        #si valeur négative
                 res =  (val ^ 0b11111111111)+1
                 self.temperature = - res * 0.125
             else :                                  #si valeur positive              
                 self.temperature = val * 0.125
-            print("temperature:",self.temperature)
             return self.temperature
         except OSError as e:
             print(f"Erreur I2C : {e}")
