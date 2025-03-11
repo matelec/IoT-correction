@@ -1,0 +1,4 @@
+# Ignorer le fichier contenant les paramètres sensibles
+config.json
+.DS_Store
+
