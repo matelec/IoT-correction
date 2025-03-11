@@ -1,7 +1,7 @@
 from machine import Pin
 import time
 
-class RGB:
+class Rgb:
     def __init__(self, pin_r, pin_g, pin_b):
         self.r = Pin(pin_r, Pin.OUT)
         self.g = Pin(pin_g, Pin.OUT)

@@ -3,7 +3,7 @@ from ConnectWifi import WiFiConnection
 from parametres import SSID, PASSWORD
 from Temperature import LectureTemperature
 from Affichage import AffichageOled
-from DelRGB import RGB
+from DelRGB import Rgb
 from machine import Pin, SoftI2C
 import ssd1306
 import time   
@@ -15,7 +15,7 @@ temp=25
 wifi = WiFiConnection(ssid=SSID, key=PASSWORD, max_retries=10)    #instance de la classe WifiConnection
 capteur_temp = LectureTemperature(i2c,Pin(21),Pin(20))                  #instance de la classe LectureTemperature
 ecran = AffichageOled(128, 64, i2c)                     #instance de la classe AffichageOled
-Led = RGB(2,3,4)
+Led = Rgb(2,3,4)
 
 # définition de la fonction interruption bouton
 def interrupt_button(pin):
