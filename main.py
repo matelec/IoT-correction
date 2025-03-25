@@ -5,7 +5,6 @@ from Temperature import LectureTemperature
 from Affichage import AffichageOled
 from DelRGB import Rgb
 from machine import Pin, SoftI2C
-import ssd1306
 import time   
 
 
