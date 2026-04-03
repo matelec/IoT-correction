@@ -1,3 +1,3 @@
 
-SSID="AP-IOT-BPCIEL"
-PASSWORD="wificielCIEL2024$"
+SSID="nom SSID"
+PASSWORD="key"
