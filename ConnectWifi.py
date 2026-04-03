@@ -1,33 +1,32 @@
 import network
 import time
 
-class WiFiConnection:
-    def __init__(self, ssid, key, max_retries=10):
+class WifiConnection:
+    def __init__(self, ssid, password, max_retries=10):
         self.ssid = ssid
-        self.key = key
+        self.password = password
         self.max_retries = max_retries
         self.sta_if = network.WLAN(network.STA_IF)
 
     def connect(self):
+        self.disconnect()  # Ensure we start with a clean state
+        time.sleep(1)  # Short delay before attempting to connect
         if not self.sta_if.isconnected():
-            print('Connecting to network...')
+            print('connecting to network...')
             self.sta_if.active(True)
-            self.sta_if.connect(self.ssid, self.key)
-            
-            retries = 0
-            while not self.sta_if.isconnected() and retries < self.max_retries:
-                time.sleep(1)
-                retries += 1
-                print(f'Retrying... {retries}/{self.max_retries}')
-            
-            if not self.sta_if.isconnected():
-                print("Failed to connect to the network.")
-                return None
+            self.sta_if.connect(self.ssid, self.password)
+            for attempt in range(self.max_retries):
+                if self.sta_if.isconnected():
+                    print('network config:', self.sta_if.ifconfig())
+                    return True
+                else:  
+                    print(f'Attempt {attempt + 1} of {self.max_retries}...')
+                    time.sleep(1)
+            print('Failed to connect to WiFi after maximum retries.')
+            return False
         
-        print('Network config:', self.sta_if.ifconfig())
-        return self.sta_if
-
     def disconnect(self):
         if self.sta_if.isconnected():
             self.sta_if.disconnect()
-            print('Disconnected from the network.')
+            print('Disconnected from WiFi.')    
+

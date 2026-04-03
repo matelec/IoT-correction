@@ -6,26 +6,29 @@ class AffichageOled:
         self.width = width
         self.height = height
         self.i2c = i2c
-        self.oled = ssd1306.SSD1306_I2C(width, height, i2c)
+        self.oled = ssd1306.SSD1306_I2C(self.width, self.height, self.i2c)
 
-    def oledTemp(self,temperature):
-        self.oled.fill(0)
-        self.oled.fill_rect(0, 0, 32, 32, 1)
-        self.oled.fill_rect(2, 2, 28, 28, 0)
-        self.oled.vline(9, 8, 22, 1)
-        self.oled.vline(16, 2, 22, 1)
-        self.oled.vline(23, 8, 22, 1)
-        self.oled.fill_rect(26, 24, 2, 4, 1)
-        self.oled.text('TEMPERATURE', 40, 0)
-        self.oled.text(str(temperature), 40, 20)
-        self.oled.pixel(91, 20,1)
-        self.oled.pixel(90, 21,1)
-        self.oled.pixel(90, 22,1)
-        self.oled.pixel(91, 23,1)
-        self.oled.pixel(92, 21,1)
-        self.oled.pixel(92, 22,1)
-        self.oled.text('C', 96, 20)
-        self.oled.show()
-        time.sleep(5)
+    def eteindre(self):
         self.oled.fill(0)
         self.oled.show()
+
+    def afficher_temperature(self, message):
+        self.oled.fill(0)  # Efface l'écran
+        self.oled.rect(0, 0, self.width, self.height,1)  # Dessine un double rectangle autour du message
+        self.oled.rect(2, 2, self.width-4, self.height-4, 1) 
+        self.oled.text("TEMPERATURE:", 10, 20)  # Affiche le titre à la position (10, 20)
+        self.oled.text(str(message), 40, 30)  # Affiche le message à la position (40, 30)
+        # affichage du round pour degré celcius
+        for i in range(3):
+            for j in range(3):
+                self.oled.pixel(81+i, 30+j, 1)  
+        self.oled.text('C', 86, 30) 
+        self.oled.show()  # Met à jour l'affichage
+
+    def afficher_message(self,ssid,ipconfig):
+        self.oled.fill(0)  # Efface l'écran
+        self.oled.text("Connected : ", 10, 20)  # Affiche le titre à la position (10, 20)
+        self.oled.text(ssid, 10, 30)  # Affiche le SSID à la position (10, 30)
+        self.oled.text(ipconfig, 10, 40)  # Affiche la configuration IP à la position (10, 40)
+        self.oled.show()  # Met à jour l'affichage
+        time.sleep(15)  # Affiche le message pendant 15 secondes
