@@ -52,7 +52,7 @@ def interrupt_button():
 
 
 # définition du bouton en interruption
-bouton.irq(trigger=Pin.IRQ_FALLING, handler=lambda pin: interrupt_button())
+bouton.irq(trigger=Pin.IRQ_FALLING, handler=lambda pin: interrupt_button(Pin))
 
 
 # définition du programme principal
