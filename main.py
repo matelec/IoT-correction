@@ -66,7 +66,7 @@ def main():
         print("Connected to WiFi successfully.")
         led.success()
         oled.afficher_message(wifi.ssid, wifi.sta_if.ifconfig()[0])
-        time.sleep(10)  # Affiche le message de connexion pendant 20 secondes
+        time.sleep(10)  # Affiche le message de connexion pendant 10 secondes
         oled.eteindre()
     else:
         print("Failed to connect to WiFi.")
