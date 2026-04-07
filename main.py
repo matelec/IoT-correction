@@ -45,14 +45,14 @@ bouton = Pin(19, Pin.IN)
 
 
 # définition de la fonction interruption bouton
-def interrupt_button():
+def interrupt_button(pin):
     global affichage_actif
 
     affichage_actif = True
 
 
 # définition du bouton en interruption
-bouton.irq(trigger=Pin.IRQ_FALLING, handler=lambda pin: interrupt_button(Pin))
+bouton.irq(trigger=Pin.IRQ_FALLING, handler=interrupt_button)
 
 
 # définition du programme principal
@@ -85,12 +85,14 @@ def main():
 
         # Gestion de l'affichage déclenchée par l'IRQ
         if affichage_actif:
+            led.local()
             temp = capteur_temp.lire_temperature()
             time.sleep(1)  # Petite pause pour assurer une lecture stable de la température
             oled.afficher_temperature(temp)
             time.sleep(15)  # Affiche la température pendant 15 secondes
             oled.eteindre()
             affichage_actif = False
+            led.on('green')
 
         time.sleep(1)  # Petite pause pour éviter une boucle trop rapide
 

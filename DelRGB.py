@@ -72,4 +72,12 @@ class RGB:
 
     def mqtt(self):
         self.on('blue')
-        time.sleep(1)              
+        time.sleep(1)    
+
+    def local(self):
+        for i in range(3):
+            self.on('white')
+            time.sleep(0.5)
+            self.off()
+            time.sleep(0.5)
+        self.on('white')                  
